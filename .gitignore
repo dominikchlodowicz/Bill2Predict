@@ -1,0 +1,20 @@
+# Raw and processed datasets
+/data/
+
+# Python virtual environments
+.env/
+.venv/
+/bill2predict/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Byte‑compiled / built files
+__pycache__/
+*.py[cod]
+*.so
+
+# Logs & local config
+*.log
+*.env
