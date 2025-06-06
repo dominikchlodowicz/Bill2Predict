@@ -4,7 +4,6 @@
 # Python virtual environments
 .env/
 .venv/
-/bill2predict/
 
 # OS files
 .DS_Store
