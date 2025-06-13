@@ -1,6 +1,8 @@
 import pandas as pd
+import numpy as np
 
-def merge_date_time(df:pd.DataFrame) -> pd.DataFrame:
+
+def merge_date_time(df: pd.DataFrame) -> pd.DataFrame:
     """Merges *df* 'Date' and 'Time' columns into 'Datetime' with dd/mm/yyyy hh:mm:ss format."""
     df['Datetime'] = pd.to_datetime(
         df['Date'] + ' ' + df['Time'],
@@ -41,8 +43,22 @@ def drop_empty_days(df: pd.DataFrame, threshold: float = 50.0) -> pd.DataFrame:
 
     ratio_df['ratio'] = (ratio_df['missing_values'] / ratio_df['total_count_of_values']) * 100
 
-    days_to_delete = ratio_df[ratio_df['ratio'] > 50.0].index
+    days_to_delete = ratio_df[ratio_df['ratio'] > threshold].index
 
     df = df[~date_only.isin(days_to_delete)].copy()
+
+    return df
+
+
+def drop_multicollinearity_features(df: pd.DataFrame, threshold: float = 0.9) -> pd.DataFrame:
+    "Drop multicollinearity features based on the result of pearson's *|r|* result between features."
+    corr = df.corr()
+    
+    mask = np.triu(np.ones(corr.shape), k=1).astype(bool)
+    upper = corr.where(mask)
+
+    to_drop = [col for col in upper.columns if any(upper[col] > threshold)]
+
+    df = df.drop(columns=to_drop).copy()
 
     return df
