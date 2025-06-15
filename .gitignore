@@ -17,3 +17,9 @@ __pycache__/
 # Logs & local config
 *.log
 *.env
+
+# Notes
+notes.md
+
+# test coverage
+.coverage

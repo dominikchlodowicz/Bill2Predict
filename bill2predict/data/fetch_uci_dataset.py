@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
-"""fetch_uci_data.py
 
-Download the UCI *Individual Household Electric Power Consumption* dataset
-and extract it into the project's data directory.
-
-Usage
------
-$ python scripts/fetch_uci_data.py  # default location data/raw/uci
-$ python scripts/fetch_uci_data.py --output_dir path/to/dir
-"""
 from __future__ import annotations
 
 import argparse
